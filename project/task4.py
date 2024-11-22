@@ -54,7 +54,7 @@ class MsBfsRpq:
             next_front = new_front.copy()
             for symbol in self.__united_symbols:
                 next_front += self.__permutation_matrices[symbol] @ (
-                        new_front @ self.__adj_nfa.symbol_matrices[symbol]
+                    new_front @ self.__adj_nfa.symbol_matrices[symbol]
                 )
 
             new_front = next_front > visited_fronts
@@ -64,8 +64,8 @@ class MsBfsRpq:
 
         for left, nfa_state in zip(*visited_fronts.nonzero()):
             if (
-                    left % self.__dfa_size in self.__adj_dfa.final_states
-                    and nfa_state in self.__adj_nfa.final_states
+                left % self.__dfa_size in self.__adj_dfa.final_states
+                and nfa_state in self.__adj_nfa.final_states
             ):
                 result.add(
                     (
@@ -80,11 +80,11 @@ class MsBfsRpq:
 
 
 def ms_bfs_based_rpq(
-        regex: str,
-        graph: MultiDiGraph,
-        start_nodes: set[int],
-        final_nodes: set[int],
-        matrix_type: type(sp.spmatrix) = sp.csr_matrix,
+    regex: str,
+    graph: MultiDiGraph,
+    start_nodes: set[int],
+    final_nodes: set[int],
+    matrix_type: type(sp.spmatrix) = sp.csr_matrix,
 ) -> set[tuple[int, int]]:
     return MsBfsRpq(
         AdjacencyMatrixFA(regex_to_dfa(regex), matrix_type=matrix_type),

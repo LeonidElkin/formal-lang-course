@@ -28,9 +28,9 @@ class AdjacencyMatrixFA:
         return states_to_int, int_to_states
 
     def __init__(
-            self,
-            nfa: Optional[NondeterministicFiniteAutomaton],
-            matrix_type: type(sp.spmatrix) = sp.csr_matrix,
+        self,
+        nfa: Optional[NondeterministicFiniteAutomaton],
+        matrix_type: type(sp.spmatrix) = sp.csr_matrix,
     ):
         self.__matrix_type = matrix_type
         self.__symbol_matrices = dict()
@@ -122,7 +122,7 @@ class AdjacencyMatrixFA:
         instance.__int_to_states = {}
         instance.__states_to_int = {}
         for st1, st2 in product(
-                automaton1.states_to_int.items(), automaton2.states_to_int.items()
+            automaton1.states_to_int.items(), automaton2.states_to_int.items()
         ):
             state = State((st1[0], st2[0]))
             num = st1[1] * automaton2.states_number + st2[1]
@@ -176,17 +176,17 @@ class AdjacencyMatrixFA:
 
 
 def intersect_automata(
-        automaton1: AdjacencyMatrixFA, automaton2: AdjacencyMatrixFA
+    automaton1: AdjacencyMatrixFA, automaton2: AdjacencyMatrixFA
 ) -> AdjacencyMatrixFA:
     return AdjacencyMatrixFA.intersect(automaton1, automaton2)
 
 
 def tensor_based_rpq(
-        regex: str,
-        graph: MultiDiGraph,
-        start_nodes: set[int],
-        final_nodes: set[int],
-        matrix_type: type(sp.spmatrix) = sp.csr_matrix,
+    regex: str,
+    graph: MultiDiGraph,
+    start_nodes: set[int],
+    final_nodes: set[int],
+    matrix_type: type(sp.spmatrix) = sp.csr_matrix,
 ) -> set[tuple[int, int]]:
     regex_dfa = regex_to_dfa(regex)
     graph_nfa = graph_to_nfa(graph, start_nodes, final_nodes)
